@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
+import {v1} from "uuid";
 
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -13,20 +14,13 @@ export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
 
-
-    const filterButtons = [
-        {id: 'all', title: 'All'},
-        {id: 'active', title: 'Active'},
-        {id: 'completed', title: 'Completed'}
-    ]
-
     const myTasks1 = [
-        {id: 1, title: 'HTML & CSS', isDone: true},
-        {id: 2, title: 'JS', isDone: true},
-        {id: 3, title: 'React', isDone: false},
-        {id: 4, title: 'TypeScript', isDone: false},
-        {id: 5, title: 'Rest API', isDone: false},
-        {id: 6, title: 'GraphQL', isDone: false}
+        {id: v1(), title: 'HTML & CSS', isDone: true},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'React', isDone: false},
+        {id: v1(), title: 'TypeScript', isDone: false},
+        {id: v1(), title: 'Rest API', isDone: false},
+        {id: v1(), title: 'GraphQL', isDone: false}
     ]
     const [tasks, setTasks] = useState(myTasks1)
     const [filterValue, setFilterValue] = useState<FilterType>('all')
@@ -40,19 +34,27 @@ function App() {
         filteredTasks = tasks.filter(t => t.isDone)
     }
 
-    const removeTask = (id: number) => {
+    const removeTask = (id: string) => {
         setTasks(tasks.filter(ft => ft.id !== id))
     }
 
     const filterTasks = (filter: FilterType) => {
         setFilterValue(filter)
     }
+
+    const addTask = (title: string) => {
+        const newTask = {id: v1(), title, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
+
+
     return (
         <div className={'App'}>
             <Todolist title={'What to learn'}
                       myTasks={filteredTasks}
                       removeTasks={removeTask}
                       filterTasks={filterTasks}
+                      addTask={addTask}
             />
         </div>
     )

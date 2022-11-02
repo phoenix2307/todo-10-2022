@@ -4,22 +4,32 @@ import {FilterType, TaskType} from "./App";
 type TodolistPropsType = {
     title: string
     myTasks: TaskType[]
-    removeTasks: (id: number) => void
+    removeTasks: (id: string) => void
     filterTasks: (filter: FilterType) => void
+    addTask: (title: string) => void
 }
 
 
 export const Todolist = (props: TodolistPropsType) => {
-    const onClickHandler = (id: number) => {
+    const onClickHandler = (id: string) => {
         props.removeTasks(id)
+    }
+
+
+    const onChangeInputHandler = ()=>{
+
+    }
+    const addTaskHandler = () => {
+
+        props.addTask('new taska')
     }
 
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <button>+</button>
+                <input onChange={()=>onChangeInputHandler()}/>
+                <button onClick={addTaskHandler}>+</button>
             </div>
             <ol>
                 {props.myTasks.map(t => {
