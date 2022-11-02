@@ -9,10 +9,7 @@ export type TaskType = {
     isDone: boolean
 }
 
-export type FilterButtonType = {
-    id: string
-    title: string
-}
+export type FilterType = 'all' | 'active' | 'completed'
 
 function App() {
 
@@ -32,32 +29,28 @@ function App() {
         {id: 6, title: 'GraphQL', isDone: false}
     ]
     const [tasks, setTasks] = useState(myTasks1)
-    const [filterValue, setFilterValue] = useState('all')
+    const [filterValue, setFilterValue] = useState<FilterType>('all')
+
+    let filteredTasks = tasks
+
+    if (filterValue === 'active') {
+        filteredTasks = tasks.filter(t => !t.isDone)
+    }
+    if (filterValue === 'completed') {
+        filteredTasks = tasks.filter(t => t.isDone)
+    }
 
     const removeTask = (id: number) => {
         setTasks(tasks.filter(ft => ft.id !== id))
     }
-    const filterTasks = (idFilterBtn: string) => {
-        setTasks(myTasks1)
-        if (idFilterBtn === 'active') {
-            const filteredTasks = myTasks1.filter(ft => !ft.isDone)
-            setTasks(filteredTasks)
-        }
-        else if (idFilterBtn === 'completed') {
 
-            setTasks(myTasks1.filter(ft => ft.isDone))
-        }
-        else {
-            setTasks(myTasks1)
-        }
+    const filterTasks = (filter: FilterType) => {
+        setFilterValue(filter)
     }
-
-
     return (
         <div className={'App'}>
             <Todolist title={'What to learn'}
-                      myTasks={tasks}
-                      filterButtons={filterButtons}
+                      myTasks={filteredTasks}
                       removeTasks={removeTask}
                       filterTasks={filterTasks}
             />
