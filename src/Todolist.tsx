@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import {FilterType, TaskType} from "./App";
 
 type TodolistPropsType = {
@@ -11,24 +11,35 @@ type TodolistPropsType = {
 
 
 export const Todolist = (props: TodolistPropsType) => {
+
+    const [titleTask, setTitleTask] = useState('')
+
     const onClickHandler = (id: string) => {
         props.removeTasks(id)
     }
-
-
-    const onChangeInputHandler = ()=>{
-
-    }
+    //
+    // const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //     let inputValue = e.currentTarget.value
+    //     setTitleTask(inputValue)
+    // }
     const addTaskHandler = () => {
-
-        props.addTask('new taska')
+        props.addTask(titleTask)
+        setTitleTask('')
     }
 
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input onChange={()=>onChangeInputHandler()}/>
+                {/*<input value={titleTask} onChange={(e) => onChangeInputHandler(e)}/>*/}
+                <input value={titleTask}
+                       onChange={(e) => setTitleTask(e.currentTarget.value)}
+                       onKeyPress={(e)=>{
+                           if (e.key === 'Enter') {
+                               addTaskHandler()
+                           }
+                       }}
+                />
                 <button onClick={addTaskHandler}>+</button>
             </div>
             <ol>
@@ -42,9 +53,9 @@ export const Todolist = (props: TodolistPropsType) => {
                 })}
             </ol>
             <div>
-                <button onClick={()=>props.filterTasks('all')}>All</button>
-                <button onClick={()=>props.filterTasks('active')}>Active</button>
-                <button onClick={()=>props.filterTasks('completed')}>Completed</button>
+                <button onClick={() => props.filterTasks('all')}>All</button>
+                <button onClick={() => props.filterTasks('active')}>Active</button>
+                <button onClick={() => props.filterTasks('completed')}>Completed</button>
             </div>
 
         </div>
