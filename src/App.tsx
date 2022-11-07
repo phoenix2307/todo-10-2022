@@ -47,6 +47,10 @@ function App() {
         setTasks([newTask, ...tasks])
     }
 
+    const changeStatusTasks = (idTask: string) => {
+        setTasks(tasks.map(t => t.id === idTask ? {...t, isDone: !t.isDone} : t))
+    }
+
 
     return (
         <div className={'App'}>
@@ -55,6 +59,8 @@ function App() {
                       removeTasks={removeTask}
                       filterTasks={filterTasks}
                       addTask={addTask}
+                      changeStatusTasks={changeStatusTasks}
+                      pushedButton={filterValue}
             />
         </div>
     )

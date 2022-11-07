@@ -6,3 +6,20 @@
 .App > div {
   margin-right: 50px;
 }
+
+.error {
+  border: 1px red solid;
+}
+
+.error-message {
+  color: red;
+}
+
+.push-button {
+  background-color: darkgreen;
+  color: white;
+}
+
+.is-done {
+  opacity: 0.5;
+}
