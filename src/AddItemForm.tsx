@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react'
 
 type AddItemFormType = {
-    callback: (title: string, attention: string) => void
+    callback: (title:string) => void
 }
 export const AddItemForm = (props: AddItemFormType) => {
     const [titleItem, setTitleItem] = useState<string>('')
@@ -9,10 +9,10 @@ export const AddItemForm = (props: AddItemFormType) => {
     const addItem = () => {
         const newTitle = titleItem.trim()
         if (newTitle !== '') {
-            props.callback(titleItem, '')
+            props.callback(newTitle)
         } else {
             setError('Title must be required')
-            props.callback(titleItem, 'attention')
+            // props.callback()
         }
         setTitleItem('')
     }

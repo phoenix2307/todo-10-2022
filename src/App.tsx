@@ -35,6 +35,12 @@ function App() {
             {id: v1(), title: "React Book", isDone: true}
         ]
     });
+    function addTodolist (titleTodolist: string){
+        const newTodolistId = v1()
+        const newTodolist: TodolistType = {id: newTodolistId, title: titleTodolist, filter: "all"}
+        setTodolists([newTodolist, ...todolists])
+        setTasks({[newTodolistId]:[], ...tasks})
+    }
 
 
     function removeTask(id: string, todolistId: string) {
@@ -86,16 +92,10 @@ function App() {
         setTasks({...tasks});
     }
 
-    const callbackTest = (titleTest: string, attention: string) => {
-        attention
-            ? console.log(attention)
-            : console.log(titleTest)
-    }
 
     return (
         <div className="App">
-            <AddItemForm callback={callbackTest}/>
-
+            <AddItemForm callback={addTodolist}/>
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];
