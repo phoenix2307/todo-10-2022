@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "./universal-comonents/AddItemForm";
+import {EditableSpan} from "./universal-comonents/EditableSpan";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type TodolistType = {
@@ -35,11 +36,12 @@ function App() {
             {id: v1(), title: "React Book", isDone: true}
         ]
     });
-    function addTodolist (titleTodolist: string){
+
+    function addTodolist(titleTodolist: string) {
         const newTodolistId = v1()
         const newTodolist: TodolistType = {id: newTodolistId, title: titleTodolist, filter: "all"}
         setTodolists([newTodolist, ...todolists])
-        setTasks({[newTodolistId]:[], ...tasks})
+        setTasks({[newTodolistId]: [], ...tasks})
     }
 
 
@@ -92,10 +94,17 @@ function App() {
         setTasks({...tasks});
     }
 
+    let newTitleForSpan = 'start'
+    const editedTitle = (title: string) => {
+        newTitleForSpan = title
+    }
 
     return (
         <div className="App">
             <AddItemForm callback={addTodolist}/>
+            <EditableSpan editedTitle={editedTitle}
+                          newTitleForSpan={newTitleForSpan}
+            />
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];

@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "./universal-comonents/AddItemForm";
 
 export type TaskType = {
     id: string
