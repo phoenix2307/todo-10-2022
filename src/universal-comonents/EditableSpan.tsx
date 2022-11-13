@@ -9,6 +9,7 @@ export const EditableSpan = (props: EditableSpanType) => {
 
     const [inputValue, setInputValue] = useState(props.newTitleForSpan)
     const [renderSpan, setRenderSpan] = useState(true)
+    const [error, setError] = useState<string | null>(null)
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value)
     }
@@ -19,9 +20,14 @@ export const EditableSpan = (props: EditableSpanType) => {
 
     function addNewTitle() {
         if (inputValue.trim() !== '') {
+            props.editedTitle(inputValue)
+            setRenderSpan(true)
+            setError(null)
+        } else {
+            setError('Title must be required')
+            props.editedTitle(inputValue)
         }
-        props.editedTitle(inputValue)
-        setRenderSpan(true)
+
     }
 
     function onKeyPressHandler(e: KeyboardEvent<HTMLInputElement>) {
@@ -31,7 +37,7 @@ export const EditableSpan = (props: EditableSpanType) => {
     }
 
     return (
-        <div>
+        <>
             {renderSpan
                 ? <span onDoubleClick={onDoubleClickHandler}>{inputValue}</span>
                 : <input value={inputValue}
@@ -39,7 +45,9 @@ export const EditableSpan = (props: EditableSpanType) => {
                          onKeyPress={onKeyPressHandler}
                          onBlur={addNewTitle}
                          autoFocus/>
+
             }
-        </div>
+            {error && <div className={'error-message'}>{error}</div>}
+        </>
     )
 }

@@ -94,7 +94,7 @@ function App() {
         setTasks({...tasks});
     }
 
-    let newTitleForSpan = 'start'
+    let newTitleForSpan = 'test'
     const editedTitle = (title: string) => {
         newTitleForSpan = title
     }
@@ -102,9 +102,6 @@ function App() {
     return (
         <div className="App">
             <AddItemForm callback={addTodolist}/>
-            <EditableSpan editedTitle={editedTitle}
-                          newTitleForSpan={newTitleForSpan}
-            />
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];
@@ -128,6 +125,8 @@ function App() {
                         changeTaskStatus={changeStatus}
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
+                        editedTitle={editedTitle}
+                        // newTitleForSpan={newTitleForSpan}
                     />
                 })
             }
