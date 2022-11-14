@@ -1,7 +1,9 @@
+import {IconButton, TextField} from '@mui/material'
 import React, {ChangeEvent, useState} from 'react'
+import {Add} from "@mui/icons-material";
 
 type AddItemFormType = {
-    callback: (title:string) => void
+    callback: (title: string) => void
 }
 export const AddItemForm = (props: AddItemFormType) => {
     const [titleItem, setTitleItem] = useState<string>('')
@@ -21,18 +23,25 @@ export const AddItemForm = (props: AddItemFormType) => {
         setTitleItem(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter'){
+        if (e.key === 'Enter') {
             addItem()
         }
     }
     return (
         <div>
-            <input
-                value={titleItem}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressHandler}
-                className={error ? 'error' : ''}/>
-            <button onClick={addItem}>+</button>
+            <TextField
+                       variant={'outlined'}
+                       size={'small'}
+                       value={titleItem}
+                       onChange={onChangeHandler}
+                       onKeyPress={onKeyPressHandler}
+                       error={!!error}
+                       label={'Title'}
+                       helperText={error}
+            />
+            <IconButton onClick={addItem}>
+                <Add classes={'small'}/>
+            </IconButton>
             {error && <div className={'error-message'}>{error}</div>}
 
         </div>

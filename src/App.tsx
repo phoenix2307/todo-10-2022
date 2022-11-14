@@ -94,9 +94,10 @@ function App() {
         setTasks({...tasks});
     }
 
-    let newTitleForSpan = 'test'
+
     const editedTitle = (title: string) => {
-        newTitleForSpan = title
+        // let newTitleForSpan = title
+        // newTitleForSpan = title
     }
 
     return (
@@ -126,7 +127,6 @@ function App() {
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
                         editedTitle={editedTitle}
-                        // newTitleForSpan={newTitleForSpan}
                     />
                 })
             }
