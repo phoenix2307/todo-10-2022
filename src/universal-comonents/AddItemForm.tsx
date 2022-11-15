@@ -1,6 +1,6 @@
 import {IconButton, TextField} from '@mui/material'
 import React, {ChangeEvent, useState} from 'react'
-import {Add} from "@mui/icons-material";
+import {Add, AddBox} from "@mui/icons-material";
 
 type AddItemFormType = {
     callback: (title: string) => void
@@ -40,9 +40,10 @@ export const AddItemForm = (props: AddItemFormType) => {
                        helperText={error}
             />
             <IconButton onClick={addItem}>
-                <Add classes={'small'}/>
+                {/*<Add classes={'small'}/>*/}
+                <AddBox color={'primary'}/>
             </IconButton>
-            {error && <div className={'error-message'}>{error}</div>}
+            {/*{error && <div className={'error-message'}>{error}</div>}*/}
 
         </div>
     )

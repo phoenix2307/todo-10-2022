@@ -47,10 +47,11 @@ export const EditableSpan = (props: EditableSpanType) => {
                              onChange={onChangeHandler}
                              onKeyPress={onKeyPressHandler}
                              onBlur={addNewTitle}
-                             autoFocus/>
-
+                             autoFocus
+                             error={!!error}
+                             label={'Title'}
+                             helperText={error}/>
             }
-            {error && <div className={'error-message'}>{error}</div>}
         </>
     )
 }

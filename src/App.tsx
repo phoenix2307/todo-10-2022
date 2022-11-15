@@ -4,6 +4,8 @@ import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./universal-comonents/AddItemForm";
 import {EditableSpan} from "./universal-comonents/EditableSpan";
+import {AppBar, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type TodolistType = {
@@ -102,6 +104,17 @@ function App() {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6" color="inherit" component="div">
+                        TodoList
+                    </Typography>
+                    <Button color={'inherit'}>Log In</Button>
+                </Toolbar>
+            </AppBar>
             <AddItemForm callback={addTodolist}/>
             {
                 todolists.map(tl => {
