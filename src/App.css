@@ -1,5 +1,4 @@
 /*
-
 .App {
   padding: 30px;
   display: flex;
@@ -18,20 +17,10 @@
 }
 
 .active-filter {
-  background-color: #7fff90;
+  background-color: aquamarine;
 }
 
 .is-done {
   opacity: 0.5;
 }
-
-!*
-.delete-button {
-  max-width: 20px;
-  max-height: 20px;
-  min-width: 20px;
-  min-height: 20px;
-  padding: 5px;
-  font-size: 10px;
-}*!
 */
